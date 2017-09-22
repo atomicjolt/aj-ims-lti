@@ -1,4 +1,4 @@
-module IMS::LTI
+module AJIMS::LTI
   module Extensions
     # Module that adds Canvas specific LTI extensions
     #

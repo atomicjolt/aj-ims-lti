@@ -4,7 +4,7 @@ require "rexml/document"
 require 'uuid'
 require 'cgi'
 
-module IMS # :nodoc:
+module AJIMS # :nodoc:
 
   # :main:IMS::LTI
   # LTI is a standard defined by IMS for creating eduction Tool Consumers/Providers.

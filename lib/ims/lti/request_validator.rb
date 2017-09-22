@@ -1,4 +1,4 @@
-module IMS::LTI
+module AJIMS::LTI
   # A mixin for OAuth request validation
   module RequestValidator
 

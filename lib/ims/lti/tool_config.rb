@@ -1,4 +1,4 @@
-module IMS::LTI
+module AJIMS::LTI
   # Class used to represent an LTI configuration
   #
   # It can create and read the Common Cartridge XML representation of LTI links
@@ -130,7 +130,7 @@ module IMS::LTI
 
     # Generate XML from the current settings
     def to_xml(opts = {})
-      raise IMS::LTI::InvalidLTIConfigError, "A launch url is required for an LTI configuration." unless self.launch_url || self.secure_launch_url
+      raise AJIMS::LTI::InvalidLTIConfigError, "A launch url is required for an LTI configuration." unless self.launch_url || self.secure_launch_url
 
       builder = Builder::XmlMarkup.new(:indent => opts[:indent] || 0)
       builder.instruct!

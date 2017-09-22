@@ -1,6 +1,6 @@
 Gem::Specification.new do |s|
-  s.name = %q{ims-lti}
-  s.version = "1.1.5"
+  s.name = %q{aj-ims-lti}
+  s.version = "1.1.6"
 
   s.add_dependency 'builder'
   s.add_dependency 'oauth', '~> 0.4.5'
@@ -14,7 +14,7 @@ Gem::Specification.new do |s|
   s.extra_rdoc_files = %W(LICENSE)
   s.license = 'MIT'
   s.files = Dir["{lib}/**/*"] + ["LICENSE", "README.md", "Changelog"]
-  s.homepage = %q{http://github.com/instructure/ims-lti}
+  s.homepage = %q{http://example.com}
   s.require_paths = %W(lib)
   s.summary = %q{Ruby library for creating IMS LTI tool providers and consumers}
 end

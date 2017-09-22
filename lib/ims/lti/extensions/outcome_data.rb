@@ -1,4 +1,4 @@
-module IMS::LTI
+module AJIMS::LTI
   module Extensions
 
     # An LTI extension that adds support for sending data back to the consumer
@@ -33,12 +33,12 @@ module IMS::LTI
       #IMS::LTI::Extensions::OutcomeData::ToolProvider
       module Base
         def outcome_request_extensions
-          super + [IMS::LTI::Extensions::OutcomeData::OutcomeRequest]
+          super + [AJIMS::LTI::Extensions::OutcomeData::OutcomeRequest]
         end
       end
 
       module ToolProvider
-        include IMS::LTI::Extensions::ExtensionBase
+        include AJIMS::LTI::Extensions::ExtensionBase
         include Base
 
         # a list of the supported outcome data types
@@ -90,7 +90,7 @@ module IMS::LTI
       end
 
       module ToolConsumer
-        include IMS::LTI::Extensions::ExtensionBase
+        include AJIMS::LTI::Extensions::ExtensionBase
         include Base
         
         OUTCOME_DATA_TYPES = %w{text url}
@@ -120,7 +120,7 @@ module IMS::LTI
       end
 
       module OutcomeRequest
-        include IMS::LTI::Extensions::ExtensionBase
+        include AJIMS::LTI::Extensions::ExtensionBase
         include Base
 
         attr_accessor :outcome_text, :outcome_url, :outcome_cdata_text

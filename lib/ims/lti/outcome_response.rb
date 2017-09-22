@@ -1,4 +1,4 @@
-module IMS::LTI
+module AJIMS::LTI
   # Class for consuming/generating LTI Outcome Responses
   #
   # Response documentation: http://www.imsglobal.org/lti/v1p1pd/ltiIMGv1p1pd.html#_Toc309649691
@@ -45,7 +45,7 @@ module IMS::LTI
   #    res.generate_response_xml
   #
   class OutcomeResponse
-    include IMS::LTI::Extensions::Base
+    include AJIMS::LTI::Extensions::Base
     
     attr_accessor :request_type, :score, :message_identifier, :response_code,
             :post_response, :code_major, :severity, :description, :operation,
@@ -129,7 +129,7 @@ module IMS::LTI
         env.imsx_POXHeader do |header|
           header.imsx_POXResponseHeaderInfo do |info|
             info.imsx_version "V1.0"
-            info.imsx_messageIdentifier @message_identifier || IMS::LTI::generate_identifier
+            info.imsx_messageIdentifier @message_identifier || AJIMS::LTI::generate_identifier
             info.imsx_statusInfo do |status|
               status.imsx_codeMajor @code_major
               status.imsx_severity @severity

@@ -1,5 +1,5 @@
 
-module IMS::LTI
+module AJIMS::LTI
   module Extensions
     
     # Base functionality for creating LTI extension modules

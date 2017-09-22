@@ -1,4 +1,4 @@
-module IMS::LTI
+module AJIMS::LTI
   # Mixin module for managing LTI Launch Data
   #
   # Launch data documentation:

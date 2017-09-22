@@ -1,4 +1,4 @@
-module IMS::LTI
+module AJIMS::LTI
   module Extensions
 
     # An LTI extension that adds support for content back to the consumer
@@ -20,7 +20,7 @@ module IMS::LTI
     #
     module Content
       module ToolProvider
-        include IMS::LTI::Extensions::ExtensionBase
+        include AJIMS::LTI::Extensions::ExtensionBase
         include Base
 
         # a list of the supported outcome data types
@@ -161,7 +161,7 @@ module IMS::LTI
       end
 
       module ToolConsumer
-        include IMS::LTI::Extensions::ExtensionBase
+        include AJIMS::LTI::Extensions::ExtensionBase
         include Base
         
         # a list of the content types accepted

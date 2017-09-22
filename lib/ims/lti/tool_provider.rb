@@ -1,4 +1,4 @@
-module IMS::LTI
+module AJIMS::LTI
 
   # Class for implementing an LTI Tool Provider
   #
@@ -34,9 +34,9 @@ module IMS::LTI
   #     end
 
   class ToolProvider
-    include IMS::LTI::Extensions::Base
-    include IMS::LTI::LaunchParams
-    include IMS::LTI::RequestValidator
+    include AJIMS::LTI::Extensions::Base
+    include AJIMS::LTI::LaunchParams
+    include AJIMS::LTI::RequestValidator
 
     # OAuth credentials
     attr_accessor :consumer_key, :consumer_secret

@@ -1,9 +1,9 @@
-module IMS::LTI
+module AJIMS::LTI
   # Class for implementing an LTI Tool Consumer
   class ToolConsumer
-    include IMS::LTI::Extensions::Base
-    include IMS::LTI::LaunchParams
-    include IMS::LTI::RequestValidator
+    include AJIMS::LTI::Extensions::Base
+    include AJIMS::LTI::LaunchParams
+    include AJIMS::LTI::RequestValidator
 
     attr_accessor :consumer_key, :consumer_secret, :launch_url, :timestamp, :nonce
 
@@ -46,7 +46,7 @@ module IMS::LTI
     #
     #
     def generate_launch_data
-      raise IMS::LTI::InvalidLTIConfigError, "Not all required params set for tool launch" unless has_required_params?
+      raise AJIMS::LTI::InvalidLTIConfigError, "Not all required params set for tool launch" unless has_required_params?
 
       params = self.to_params
       params['lti_version'] ||= 'LTI-1p0'

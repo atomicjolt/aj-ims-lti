@@ -1,4 +1,4 @@
-module IMS::LTI
+module AJIMS::LTI
   # Class for consuming/generating LTI Outcome Requests
   #
   # Outcome Request documentation: http://www.imsglobal.org/lti/v1p1pd/ltiIMGv1p1pd.html#_Toc309649691
@@ -33,7 +33,7 @@ module IMS::LTI
   #      # return an unsupported OutcomeResponse
   #    end
   class OutcomeRequest
-    include IMS::LTI::Extensions::Base
+    include AJIMS::LTI::Extensions::Base
 
     REPLACE_REQUEST = 'replaceResult'
     DELETE_REQUEST = 'deleteResult'
@@ -121,7 +121,7 @@ module IMS::LTI
     #
     # @return [OutcomeResponse] The response from the Tool Consumer
     def post_outcome_request
-      raise IMS::LTI::InvalidLTIConfigError, "" unless has_required_attributes?
+      raise AJIMS::LTI::InvalidLTIConfigError, "" unless has_required_attributes?
 
       consumer = OAuth::Consumer.new(@consumer_key, @consumer_secret)
       token = OAuth::AccessToken.new(consumer)
@@ -189,7 +189,7 @@ module IMS::LTI
         env.imsx_POXHeader do |header|
           header.imsx_POXRequestHeaderInfo do |info|
             info.imsx_version "V1.0"
-            info.imsx_messageIdentifier @message_identifier || IMS::LTI::generate_identifier
+            info.imsx_messageIdentifier @message_identifier || AJIMS::LTI::generate_identifier
           end
         end
         env.imsx_POXBody do |body|
