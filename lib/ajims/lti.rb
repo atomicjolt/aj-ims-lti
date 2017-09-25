@@ -40,11 +40,11 @@ module AJIMS # :nodoc:
   end
 end
 
-require 'ims/lti/extensions'
-require 'ims/lti/launch_params'
-require 'ims/lti/request_validator'
-require 'ims/lti/tool_provider'
-require 'ims/lti/tool_consumer'
-require 'ims/lti/outcome_request'
-require 'ims/lti/outcome_response'
-require 'ims/lti/tool_config'
+require 'ajims/lti/extensions'
+require 'ajims/lti/launch_params'
+require 'ajims/lti/request_validator'
+require 'ajims/lti/tool_provider'
+require 'ajims/lti/tool_consumer'
+require 'ajims/lti/outcome_request'
+require 'ajims/lti/outcome_response'
+require 'ajims/lti/tool_config'

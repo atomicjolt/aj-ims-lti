@@ -40,6 +40,6 @@ module AJIMS::LTI
   end
 end
 
-require 'ims/lti/extensions/outcome_data'
-require 'ims/lti/extensions/content'
-require 'ims/lti/extensions/canvas'
+require 'ajims/lti/extensions/outcome_data'
+require 'ajims/lti/extensions/content'
+require 'ajims/lti/extensions/canvas'
