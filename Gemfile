@@ -1,4 +1,5 @@
 source "http://rubygems.org"
+gemspec
 
 gem "oauth",   "~>0.4.5"
 gem "builder"
