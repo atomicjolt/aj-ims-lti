@@ -11,7 +11,7 @@ module TestLTIExtension
   end
 
   module ToolProvider
-    include IMS::LTI::Extensions::ExtensionBase
+    include AJIMS::LTI::Extensions::ExtensionBase
     include Base
     
     def tp_test
@@ -20,7 +20,7 @@ module TestLTIExtension
   end
 
   module ToolConsumer
-    include IMS::LTI::Extensions::ExtensionBase
+    include AJIMS::LTI::Extensions::ExtensionBase
     include Base
     
     def special_key=(val)
@@ -33,7 +33,7 @@ module TestLTIExtension
   end
 
   module OutcomeRequest
-    include IMS::LTI::Extensions::ExtensionBase
+    include AJIMS::LTI::Extensions::ExtensionBase
     include Base
     
     attr_accessor :test_val
@@ -49,7 +49,7 @@ module TestLTIExtension
   end
 
   module OutcomeResponse
-    include IMS::LTI::Extensions::ExtensionBase
+    include AJIMS::LTI::Extensions::ExtensionBase
     include Base
 
     def response_test
@@ -58,7 +58,7 @@ module TestLTIExtension
   end
 end
 
-describe IMS::LTI::Extensions do
+describe AJIMS::LTI::Extensions do
   before do
     create_test_tp
     @tp.extend TestLTIExtension::ToolProvider
@@ -67,28 +67,28 @@ describe IMS::LTI::Extensions do
   it "should add TP functionality" do
     @tp.tp_test.should == 'hey'
   end
-  
+ 
   it "should add TC functionality" do
-    tc = IMS::LTI::ToolConsumer.new("hey", "ho")
+    tc = AJIMS::LTI::ToolConsumer.new("hey", "ho")
     tc.extend TestLTIExtension::ToolConsumer
     tc.special_key = 'hey'
     tc.special_key.should == 'hey'
     tc.to_params['ext_special_key'].should == 'hey'
   end
-  
+ 
   it "should generate an extended outcome request" do
     mock_request(replace_result_xml)
     @tp.post_replace_result!(5)
     @tp.last_outcome_request.request_test.should == 'hey there'
   end
-  
+ 
   it "should parse replaceResult xml with extension val" do
-    req = IMS::LTI::OutcomeRequest.new
+    req = AJIMS::LTI::OutcomeRequest.new
     req.extend TestLTIExtension::OutcomeRequest
     req.process_xml(result_xml % %{<testVal>hey there</testVal>})
     req.test_val.should == 'hey there'
   end
-  
+
   it "should generate an extended outcome response" do
     mock_request(replace_result_xml)
     @tp.post_replace_result!(5)

@@ -3,7 +3,7 @@ $LOAD_PATH.unshift(lib_dir) unless $LOAD_PATH.include?(lib_dir)
 
 require 'rspec'
 require 'net/http'
-require 'ims/lti'
+require 'ajims/lti'
 
 def create_params
   @params = {
@@ -22,7 +22,7 @@ end
 
 def create_test_tp
   create_params
-  @tp = IMS::LTI::ToolProvider.new("hi", 'oi', @params)
+  @tp = AJIMS::LTI::ToolProvider.new("hi", 'oi', @params)
 end
 
 def expected_xml; %{<?xml version="1.0" encoding="UTF-8"?><imsx_POXEnvelopeRequest xmlns="http://www.imsglobal.org/lis/oms1p0/pox"><imsx_POXHeader><imsx_POXRequestHeaderInfo><imsx_version>V1.0</imsx_version><imsx_messageIdentifier>123456789</imsx_messageIdentifier></imsx_POXRequestHeaderInfo></imsx_POXHeader><imsx_POXBody>%s</imsx_POXBody></imsx_POXEnvelopeRequest>} end
@@ -32,7 +32,7 @@ def read_result_xml; expected_xml % %{<readResultRequest><resultRecord><sourcedG
 def delete_result_xml; expected_xml % %{<deleteResultRequest><resultRecord><sourcedGUID><sourcedId>261-154-728-17-784</sourcedId></sourcedGUID></resultRecord></deleteResultRequest>} end
 
 def mock_request(expected_xml)
-  IMS::LTI.stub(:generate_identifier).and_return("123456789")
+  AJIMS::LTI.stub(:generate_identifier).and_return("123456789")
   @fake = Object
   OAuth::AccessToken.stub(:new).and_return(@fake)
   @fake.should_receive(:code).and_return("200")

@@ -1,8 +1,8 @@
 require "spec_helper"
-describe IMS::LTI::ToolConsumer do
+describe AJIMS::LTI::ToolConsumer do
   def create_tc
     # This is the example in the docs at: http://www.imsglobal.org/LTI/v1p1pd/ltiIMGv1p1pd.html#_Toc309649707
-    @tc = IMS::LTI::ToolConsumer.new('12345', 'secret')
+    @tc = AJIMS::LTI::ToolConsumer.new('12345', 'secret')
     @tc.launch_url = 'http://dr-chuck.com/ims/php-simple/tool.php'
     @tc.timestamp = '1251600739'
     @tc.nonce = 'c8350c0e47782d16d2fa48b2090c1d8f'
@@ -38,7 +38,7 @@ describe IMS::LTI::ToolConsumer do
   end
 
   it "should generate a correct signature with a non-standard port" do
-    @tc = IMS::LTI::ToolConsumer.new('12345', 'secret', 'resource_link_id' => 1)
+    @tc = AJIMS::LTI::ToolConsumer.new('12345', 'secret', 'resource_link_id' => 1)
     @tc.timestamp = '1251600739'
     @tc.nonce = 'c8350c0e47782d16d2fa48b2090c1d8f'
 
@@ -60,7 +60,7 @@ describe IMS::LTI::ToolConsumer do
   end
 
   it "should include URI query parameters" do
-    @tc = IMS::LTI::ToolConsumer.new('12345', 'secret', 'resource_link_id' => 1, 'user_id' => 2)
+    @tc = AJIMS::LTI::ToolConsumer.new('12345', 'secret', 'resource_link_id' => 1, 'user_id' => 2)
     @tc.launch_url = 'http://www.yahoo.com?a=1&b=2'
     hash = @tc.generate_launch_data
     hash['a'].should == '1'
@@ -68,7 +68,7 @@ describe IMS::LTI::ToolConsumer do
   end
 
   it "should not allow overwriting other parameters from the URI query string" do
-    @tc = IMS::LTI::ToolConsumer.new('12345', 'secret', 'resource_link_id' => 1, 'user_id' => 2)
+    @tc = AJIMS::LTI::ToolConsumer.new('12345', 'secret', 'resource_link_id' => 1, 'user_id' => 2)
     @tc.launch_url = 'http://www.yahoo.com?user_id=123&lti_message_type=1234'
     hash = @tc.generate_launch_data
     hash['user_id'].should == '2'

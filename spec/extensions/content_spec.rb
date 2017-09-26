@@ -1,14 +1,14 @@
 require File.expand_path(File.dirname(__FILE__) + '/../spec_helper.rb')
 
-describe IMS::LTI::Extensions do
+describe AJIMS::LTI::Extensions do
   before do
     create_params
     @params['ext_content_intended_use'] = "homework"
     @params['ext_content_return_types'] = "file,url,lti_launch_url,image_url,iframe,oembed"
     @params['ext_content_return_url'] = "http://example.com/content_return"
     @params['ext_content_file_extensions'] = 'txt,jpg'
-    @tp = IMS::LTI::ToolProvider.new("hi", 'oi', @params)
-    @tp.extend IMS::LTI::Extensions::Content::ToolProvider
+    @tp = AJIMS::LTI::ToolProvider.new("hi", 'oi', @params)
+    @tp.extend AJIMS::LTI::Extensions::Content::ToolProvider
   end
 
   it "should correctly interpret extension parameters" do
@@ -107,8 +107,8 @@ describe IMS::LTI::Extensions do
 
   describe "tool consumer" do
     let(:tc) do
-      tc = IMS::LTI::ToolConsumer.new("hey", "ho")
-      tc.extend IMS::LTI::Extensions::Content::ToolConsumer
+      tc = AJIMS::LTI::ToolConsumer.new("hey", "ho")
+      tc.extend AJIMS::LTI::Extensions::Content::ToolConsumer
     end
 
     it "should accept content return types" do

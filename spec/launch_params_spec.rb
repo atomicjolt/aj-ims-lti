@@ -1,6 +1,6 @@
 require "spec_helper"
-describe IMS::LTI::LaunchParams do
-  [IMS::LTI::ToolConsumer, IMS::LTI::ToolProvider].each do |tool|
+describe AJIMS::LTI::LaunchParams do
+  [AJIMS::LTI::ToolConsumer, AJIMS::LTI::ToolProvider].each do |tool|
     context tool do
       before do
         create_params

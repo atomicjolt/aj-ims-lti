@@ -1,5 +1,5 @@
 require "spec_helper"
-describe IMS::LTI::OutcomeRequest do
+describe AJIMS::LTI::OutcomeRequest do
   before do
     create_test_tp
   end
@@ -21,7 +21,7 @@ describe IMS::LTI::OutcomeRequest do
   end
 
   it "should parse replaceResult xml" do
-    req = IMS::LTI::OutcomeRequest.new
+    req = AJIMS::LTI::OutcomeRequest.new
     req.process_xml(replace_result_xml)
     req.operation.should == 'replaceResult'
     req.lis_result_sourcedid.should == '261-154-728-17-784'
@@ -30,7 +30,7 @@ describe IMS::LTI::OutcomeRequest do
   end
 
   it "should parse readResult xml" do
-    req = IMS::LTI::OutcomeRequest.new
+    req = AJIMS::LTI::OutcomeRequest.new
     req.process_xml(read_result_xml)
     req.operation.should == 'readResult'
     req.lis_result_sourcedid.should == '261-154-728-17-784'
@@ -39,7 +39,7 @@ describe IMS::LTI::OutcomeRequest do
   end
 
   it "should parse deleteResult xml" do
-    req = IMS::LTI::OutcomeRequest.new
+    req = AJIMS::LTI::OutcomeRequest.new
     req.process_xml(delete_result_xml)
     req.operation.should == 'deleteResult'
     req.lis_result_sourcedid.should == '261-154-728-17-784'

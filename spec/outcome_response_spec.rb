@@ -1,5 +1,5 @@
 require "spec_helper"
-describe IMS::LTI::OutcomeResponse do
+describe AJIMS::LTI::OutcomeResponse do
 
   response_xml = <<-XML
 <?xml version="1.0" encoding="UTF-8"?>
@@ -32,7 +32,7 @@ describe IMS::LTI::OutcomeResponse do
 
   it "should parse replaceResult response xml" do
     mock_response(response_xml)
-    res = IMS::LTI::OutcomeResponse.from_post_response(@fake)
+    res = AJIMS::LTI::OutcomeResponse.from_post_response(@fake)
     res.success?.should == true
     res.code_major.should == 'success'
     res.severity.should == 'status'
@@ -55,7 +55,7 @@ describe IMS::LTI::OutcomeResponse do
     XML
     read_xml.gsub!('replaceResult', 'readResult')
     mock_response(read_xml)
-    res = IMS::LTI::OutcomeResponse.from_post_response(@fake)
+    res = AJIMS::LTI::OutcomeResponse.from_post_response(@fake)
     res.success?.should == true
     res.code_major.should == 'success'
     res.severity.should == 'status'
@@ -67,7 +67,7 @@ describe IMS::LTI::OutcomeResponse do
 
   it "should parse readResult response xml" do
     mock_response(response_xml.gsub('replaceResult', 'deleteResult'))
-    res = IMS::LTI::OutcomeResponse.from_post_response(@fake)
+    res = AJIMS::LTI::OutcomeResponse.from_post_response(@fake)
     res.success?.should == true
     res.code_major.should == 'success'
     res.severity.should == 'status'
@@ -79,12 +79,12 @@ describe IMS::LTI::OutcomeResponse do
 
   it "should recognize a failure response" do
     mock_response(response_xml.gsub('success', 'failure'))
-    res = IMS::LTI::OutcomeResponse.from_post_response(@fake)
+    res = AJIMS::LTI::OutcomeResponse.from_post_response(@fake)
     res.failure?.should == true
   end
 
   it "should generate response xml" do
-    res = IMS::LTI::OutcomeResponse.new
+    res = AJIMS::LTI::OutcomeResponse.new
     res.process_xml(response_xml)
     alt = response_xml.gsub("\n",'')
     res.generate_response_xml.should == alt

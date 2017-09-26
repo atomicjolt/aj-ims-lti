@@ -7,7 +7,7 @@ Gem::Specification.new do |s|
   s.add_dependency 'uuid'
 
   s.add_development_dependency 'rspec'
-  s.add_development_dependency 'ruby-debug'
+#  s.add_development_dependency 'ruby-debug'
 
   s.authors = ['Atomic Jolt', 'Nick Benoit']
   s.date = '2017-09-25'
