@@ -1,17 +1,22 @@
-# IMS LTI
+# AJ IMS LTI
 
 This ruby library is to help create Tool Providers and Tool Consumers for the
 [IMS LTI standard](http://www.imsglobal.org/lti/index.html).
 
+Nearly a fork of the Instructure IMS LTI gem. Top level namespace has been
+changed in order to allow concurrent use of Instructure IMS LTI gem, and this
+gem. Instructure has expressed disinterest in supporting grade writeback, which
+this version of the gem does support.
+
 ## Installation
-This is packaged as the `ims-lti` rubygem, so you can just add the dependency to
+This is packaged as the `aj-ims-lti` rubygem, so you can just add the dependency to
 your Gemfile or install the gem on your system:
 
-    gem install ims-lti
+    gem install aj-ims-lti
 
 To require the library in your project:
 
-    require 'ims/lti'
+    require 'ajims/lti'
 
 To validate the OAuth signatures you need to require the appropriate request
 proxy for your application. For example:
@@ -55,7 +60,7 @@ the request, you can initialize a `ToolProvider` object with them and the post p
 
 ```ruby
 # Initialize TP object with OAuth creds and post parameters
-provider = IMS::LTI::ToolProvider.new(consumer_key, consumer_secret, params)
+provider = AJIMS::LTI::ToolProvider.new(consumer_key, consumer_secret, params)
 
 # Verify OAuth signature by passing the request object
 if provider.valid_request?(request)
