@@ -1,6 +1,6 @@
 Gem::Specification.new do |s|
   s.name = 'aj-ims-lti'
-  s.version = '1.0.0'
+  s.version = '1.0.1'
 
   s.add_dependency 'builder'
   s.add_dependency 'oauth', '~> 0.4.5'

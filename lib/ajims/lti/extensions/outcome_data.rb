@@ -84,7 +84,12 @@ module AJIMS::LTI
           elsif data["text"]
             req.outcome_text = data["text"]
           end
-          req.outcome_url = data["url"] if data["url"]
+
+          if data["lti_launch_url"]
+            req.outcome_lti_launch_url = data["lti_launch_url"] if data["lti_launch_url"]
+          else
+            req.outcome_url = data["url"] if data["url"]
+          end
           req.post_replace_result!(score)
         end
       end
@@ -123,11 +128,11 @@ module AJIMS::LTI
         include AJIMS::LTI::Extensions::ExtensionBase
         include Base
 
-        attr_accessor :outcome_text, :outcome_url, :outcome_cdata_text
+        attr_accessor :outcome_text, :outcome_url, :outcome_cdata_text, :outcome_lti_launch_url
 
         def result_values(node)
           super
-          if @outcome_text || @outcome_url || @outcome_cdata_text
+          if @outcome_text || @outcome_url || @outcome_cdata_text || @outcome_lti_launch_url
             node.resultData do |res_data|
               if @outcome_cdata_text
                 res_data.text {
@@ -137,18 +142,20 @@ module AJIMS::LTI
                 res_data.text @outcome_text
               end
               res_data.url @outcome_url if @outcome_url
+              res_data.ltiLaunchUrl @outcome_lti_launch_url if @outcome_lti_launch_url
             end
           end
         end
 
         def has_result_data?
-          !!@outcome_text || !!@outcome_url || super
+          !!@outcome_text || !!@outcome_url || !!@outcome_lti_launch_url || super
         end
         
         def extention_process_xml(doc)
           super
           @outcome_text = doc.get_text("//resultRecord/result/resultData/text")
           @outcome_url = doc.get_text("//resultRecord/result/resultData/url")
+          @outcome_lti_launch_url = doc.get_text("//resultRecord/result/resultData/ltiLaunchUrl")
         end
       end
 
