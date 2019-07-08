@@ -40,6 +40,7 @@ module AJIMS # :nodoc:
   end
 end
 
+require 'ajims/lti/exceptions'
 require 'ajims/lti/extensions'
 require 'ajims/lti/launch_params'
 require 'ajims/lti/request_validator'
