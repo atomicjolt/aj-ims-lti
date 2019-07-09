@@ -90,4 +90,20 @@ describe AJIMS::LTI::OutcomeResponse do
     res.generate_response_xml.should == alt
   end
 
+  it "should raise an exception if the xml is invalid" do
+    html = <<-HTML
+<html>
+<head>
+  <meta charset="UTF-8">
+</head>
+<body>
+</body>
+</html>
+HTML
+
+    res = AJIMS::LTI::OutcomeResponse.new
+    expect { res.process_xml(html) }.to raise_exception(AJIMS::LTI::XmlParseException) do |ex|
+      expect(ex.content).to eq(html)
+    end
+  end
 end

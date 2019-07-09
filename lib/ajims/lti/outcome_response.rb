@@ -117,6 +117,11 @@ module AJIMS::LTI
       @operation = doc.text("//imsx_statusInfo/imsx_operationRefIdentifier")
       @score = doc.text("//readResultResponse//resultScore/textString")
       @score = @score.to_s if @score
+    rescue REXML::ParseException
+      raise AJIMS::LTI::XmlParseException.new(
+        xml,
+        "Failed to parse XML response from canvas"
+      )
     end
 
     # Generate XML based on the current configuration
