@@ -75,9 +75,11 @@ module AJIMS::LTI
     # POSTs the given score to the Tool Consumer with a replaceResult
     #
     # @return [OutcomeResponse] The response from the Tool Consumer
-    def post_replace_result!(score)
+    def post_replace_result!(score, submitted_at:)
       @operation = REPLACE_REQUEST
       @score = score
+      @submitted_at = submitted_at
+
       post_outcome_request
     end
 
@@ -125,11 +127,13 @@ module AJIMS::LTI
 
       consumer = OAuth::Consumer.new(@consumer_key, @consumer_secret)
       token = OAuth::AccessToken.new(consumer)
+
       res = token.post(
-              @lis_outcome_service_url,
-              generate_request_xml,
-              'Content-Type' => 'application/xml'
+        @lis_outcome_service_url,
+        generate_request_xml,
+        'Content-Type' => 'application/xml'
       )
+
       @outcome_response = extend_outcome_response(OutcomeResponse.new)
       @outcome_response.process_post_response(res)
     end
@@ -154,6 +158,16 @@ module AJIMS::LTI
     private
     
     def extention_process_xml(doc)
+    end
+
+    def has_result_time?
+      @submitted_at.present?
+    end
+
+    def submission_details(node)
+      return unless has_result_time?
+
+      node.submittedAt @submitted_at.to_s
     end
     
     def has_result_data?
@@ -194,6 +208,10 @@ module AJIMS::LTI
         end
         env.imsx_POXBody do |body|
           body.tag!(@operation + 'Request') do |request|
+            request.submissionDetails do |details|
+              submission_details(details)
+            end
+
             request.resultRecord do |record|
               record.sourcedGUID do |guid|
                 guid.sourcedId @lis_result_sourcedid
