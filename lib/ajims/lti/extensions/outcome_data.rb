@@ -90,7 +90,7 @@ module AJIMS::LTI
           else
             req.outcome_url = data["url"] if data["url"]
           end
-          req.post_replace_result!(score)
+          req.post_replace_result!(score, submitted_at: data["submitted_at"])
         end
       end
 
