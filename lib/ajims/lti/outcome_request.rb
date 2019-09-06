@@ -75,7 +75,7 @@ module AJIMS::LTI
     # POSTs the given score to the Tool Consumer with a replaceResult
     #
     # @return [OutcomeResponse] The response from the Tool Consumer
-    def post_replace_result!(score, submitted_at:)
+    def post_replace_result!(score, submitted_at: nil)
       @operation = REPLACE_REQUEST
       @score = score
       @submitted_at = submitted_at

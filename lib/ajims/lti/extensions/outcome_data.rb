@@ -77,7 +77,7 @@ module AJIMS::LTI
         # Creates a new OutcomeRequest object and stores it in @outcome_requests
         #
         # @return [OutcomeResponse] the response from the Tool Consumer
-        def post_replace_result_with_data!(score = nil, data={}, submitted_at: nil)
+        def post_replace_result_with_data!(score = nil, data={})
           req = new_request
           if data["cdata_text"] 
             req.outcome_cdata_text = data["cdata_text"] 
@@ -90,7 +90,7 @@ module AJIMS::LTI
           else
             req.outcome_url = data["url"] if data["url"]
           end
-          req.post_replace_result!(score, submitted_at: submitted_at)
+          req.post_replace_result!(score, submitted_at: data["submitted_at"])
         end
       end
 
