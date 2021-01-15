@@ -46,6 +46,13 @@ describe AJIMS::LTI::Extensions do
     
     @tp.post_replace_result_with_data!(nil, "url" => "http://www.example.com")
   end
+
+  it "should generate an extended outcome file request" do
+    xml = result_xml % %{<resultData><downloadUrl>http://www.example.com</downloadUrl><documentName>what the document</documentName></resultData>}
+    mock_request(xml)
+    
+    @tp.post_replace_result_with_data!(nil, "download_url" => "http://www.example.com", "document_name" => "what the document")
+  end
   
   it "should parse replaceResult xml with extension val" do
     req = AJIMS::LTI::OutcomeRequest.new
@@ -66,5 +73,13 @@ describe AJIMS::LTI::Extensions do
     req.extend AJIMS::LTI::Extensions::OutcomeData::OutcomeRequest
     req.process_xml(result_xml % %{<resultData><text>what the text</text></resultData>})
     req.outcome_text.should == "what the text"
+  end
+
+  it "should parse replaceResult xml with extension val" do
+    req = AJIMS::LTI::OutcomeRequest.new
+    req.extend AJIMS::LTI::Extensions::OutcomeData::OutcomeRequest
+    req.process_xml(result_xml % %{<resultData><downloadUrl>http://www.example.com</downloadUrl><documentName>what the document</documentName></resultData>})
+    req.outcome_download_url.should == "http://www.example.com"
+    req.outcome_document_name.should == "what the document"
   end
 end
