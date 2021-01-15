@@ -142,7 +142,7 @@ module AJIMS::LTI
 
         def result_values(node)
           super
-          if @outcome_text || @outcome_url || @outcome_cdata_text || @outcome_lti_launch_url
+          if has_non_score_result_data?
             node.resultData do |res_data|
               if @outcome_cdata_text
                 res_data.text {
@@ -159,12 +159,15 @@ module AJIMS::LTI
           end
         end
 
-        def has_result_data?
+        def has_non_score_result_data?
           !!@outcome_text ||
             !!@outcome_url ||
             !!@outcome_lti_launch_url ||
-            (!!@outcome_download_url && !!@outcome_document_name) ||
-            super
+            (!!@outcome_download_url && !!@outcome_document_name)
+        end
+
+        def has_result_data?
+            has_non_score_result_data? || super
         end
         
         def extention_process_xml(doc)
