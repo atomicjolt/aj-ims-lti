@@ -161,7 +161,7 @@ module AJIMS::LTI
     end
 
     def has_result_time?
-      @submitted_at.present?
+      !@submitted_at.nil? && !@submitted_at.empty?
     end
 
     def submission_details(node)
