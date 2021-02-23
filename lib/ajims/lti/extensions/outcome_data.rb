@@ -87,6 +87,9 @@ module AJIMS::LTI
 
           if data["lti_launch_url"]
             req.outcome_lti_launch_url = data["lti_launch_url"] if data["lti_launch_url"]
+          elsif data["download_url"] && data["document_name"]
+            req.outcome_download_url = data["download_url"]
+            req.outcome_document_name = data["document_name"]
           else
             req.outcome_url = data["url"] if data["url"]
           end
@@ -128,11 +131,18 @@ module AJIMS::LTI
         include AJIMS::LTI::Extensions::ExtensionBase
         include Base
 
-        attr_accessor :outcome_text, :outcome_url, :outcome_cdata_text, :outcome_lti_launch_url
+        attr_accessor(
+          :outcome_text,
+          :outcome_url,
+          :outcome_cdata_text,
+          :outcome_lti_launch_url,
+          :outcome_download_url,
+          :outcome_document_name,
+        )
 
         def result_values(node)
           super
-          if @outcome_text || @outcome_url || @outcome_cdata_text || @outcome_lti_launch_url
+          if has_non_score_result_data?
             node.resultData do |res_data|
               if @outcome_cdata_text
                 res_data.text {
@@ -143,12 +153,21 @@ module AJIMS::LTI
               end
               res_data.url @outcome_url if @outcome_url
               res_data.ltiLaunchUrl @outcome_lti_launch_url if @outcome_lti_launch_url
+              res_data.downloadUrl @outcome_download_url if @outcome_download_url
+              res_data.documentName @outcome_document_name if @outcome_document_name
             end
           end
         end
 
+        def has_non_score_result_data?
+          !!@outcome_text || !!@outcome_cdata_text ||
+            !!@outcome_url ||
+            !!@outcome_lti_launch_url ||
+            (!!@outcome_download_url && !!@outcome_document_name)
+        end
+
         def has_result_data?
-          !!@outcome_text || !!@outcome_url || !!@outcome_lti_launch_url || super
+            has_non_score_result_data? || super
         end
         
         def extention_process_xml(doc)
@@ -156,6 +175,8 @@ module AJIMS::LTI
           @outcome_text = doc.get_text("//resultRecord/result/resultData/text")
           @outcome_url = doc.get_text("//resultRecord/result/resultData/url")
           @outcome_lti_launch_url = doc.get_text("//resultRecord/result/resultData/ltiLaunchUrl")
+          @outcome_download_url = doc.get_text("//resultRecord/result/resultData/downloadUrl")
+          @outcome_document_name = doc.get_text("//resultRecord/result/resultData/documentName")
         end
       end
 
