@@ -160,7 +160,7 @@ module AJIMS::LTI
         end
 
         def has_non_score_result_data?
-          !!@outcome_text ||
+          !!@outcome_text || !!@outcome_cdata_text ||
             !!@outcome_url ||
             !!@outcome_lti_launch_url ||
             (!!@outcome_download_url && !!@outcome_document_name)
