@@ -156,12 +156,12 @@ module AJIMS::LTI
     end
 
     private
-    
+
     def extention_process_xml(doc)
     end
 
     def has_result_time?
-      !@submitted_at.nil? && !@submitted_at.empty?
+      !@submitted_at.nil?
     end
 
     def submission_details(node)
@@ -169,14 +169,14 @@ module AJIMS::LTI
 
       node.submittedAt @submitted_at.to_s
     end
-    
+
     def has_result_data?
       !!@score
     end
-    
+
     def results(node)
       return unless has_result_data?
-      
+
       node.result do |res|
         result_values(res)
       end
