@@ -10,6 +10,12 @@ describe AJIMS::LTI::OutcomeRequest do
     @tp.last_outcome_success?.should == false
   end
 
+  it "should post the replaceResult request with a submission time" do
+    at = Time.new("2021-01-01 00:00:00 -0500")
+    mock_request(replace_result_with_date_xml)
+    @tp.post_replace_result!(5, submitted_at: at)
+  end
+
   it "should post readResult request" do
     mock_request(read_result_xml)
     @tp.post_read_result!
@@ -46,5 +52,4 @@ describe AJIMS::LTI::OutcomeRequest do
     req.message_identifier.should == '123456789'
     req.score.should == nil
   end
-
 end

@@ -105,7 +105,7 @@ module AJIMS::LTI
     def ta?
       has_role?('TeachingAssistant')
     end
-    
+
     # Check if the request was an LTI Launch Request
     def launch_request?
       lti_message_type == 'basic-lti-launch-request'
@@ -126,8 +126,8 @@ module AJIMS::LTI
     # Creates a new OutcomeRequest object and stores it in @outcome_requests
     #
     # @return [OutcomeResponse] the response from the Tool Consumer
-    def post_replace_result!(score)
-      new_request.post_replace_result!(score)
+    def post_replace_result!(score, submitted_at: nil)
+      new_request.post_replace_result!(score, submitted_at: submitted_at)
     end
 
     # POSTs a delete request to the Tool Consumer
@@ -189,9 +189,9 @@ module AJIMS::LTI
                          :consumer_secret => @consumer_secret,
                          :lis_outcome_service_url => lis_outcome_service_url,
                          :lis_result_sourcedid =>lis_result_sourcedid)
-      
+
       extend_outcome_request(@outcome_requests.last)
     end
-    
+
   end
 end
