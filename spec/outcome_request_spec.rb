@@ -11,7 +11,7 @@ describe AJIMS::LTI::OutcomeRequest do
   end
 
   it "should post the replaceResult request with a submission time" do
-    at = Time.new("2021-01-01 00:00:00 -0500")
+    at = Time.new(2021, 01, 01, 0, 0, 0, "-0500")
     mock_request(replace_result_with_date_xml)
     @tp.post_replace_result!(5, submitted_at: at)
   end
