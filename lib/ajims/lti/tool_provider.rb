@@ -169,7 +169,7 @@ module AJIMS::LTI
     #    tc.lti_msg = "hi there"
     #    tc.lti_errorlog = "error happens"
     #
-    #    tc.build_return_url # => "http://example.com/return?lti_msg=hi%20there&lti_errorlog=error%20happens"
+    #    tc.build_return_url # => "http://example.com/return?lti_msg=hi+there&lti_errorlog=error+happens"
     def build_return_url
       return nil unless launch_presentation_return_url
       messages = []
