@@ -169,13 +169,13 @@ module AJIMS::LTI
     #    tc.lti_msg = "hi there"
     #    tc.lti_errorlog = "error happens"
     #
-    #    tc.build_return_url # => "http://example.com/return?lti_msg=hi%20there&lti_errorlog=error%20happens"
+    #    tc.build_return_url # => "http://example.com/return?lti_msg=hi+there&lti_errorlog=error+happens"
     def build_return_url
       return nil unless launch_presentation_return_url
       messages = []
       %w{lti_errormsg lti_errorlog lti_msg lti_log}.each do |m|
         if message = self.send(m)
-          messages << "#{m}=#{URI.escape(message)}"
+          messages << "#{m}=#{URI.encode_www_form_component(message)}"
         end
       end
       q_string = messages.any? ? ("?" + messages.join("&")) : ''
