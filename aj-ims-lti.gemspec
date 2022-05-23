@@ -1,15 +1,15 @@
 Gem::Specification.new do |s|
   s.name = 'aj-ims-lti'
-  s.version = '1.2.0'
+  s.version = '1.2.1'
 
   s.add_dependency 'builder'
-  s.add_dependency 'oauth', '~> 0.5.5'
+  s.add_dependency 'oauth', '~> 0.5.10'
   s.add_dependency 'uuid'
 
   s.add_development_dependency 'rspec'
 #  s.add_development_dependency 'ruby-debug'
 
-  s.authors = ['Atomic Jolt', 'Nick Benoit']
+  s.authors = ['Atomic Jolt', 'Nick Benoit', 'Justin Ball', 'Matt Petro']
   s.date = '2017-09-25'
   s.extra_rdoc_files = 'LICENSE'
   s.license = 'MIT'
