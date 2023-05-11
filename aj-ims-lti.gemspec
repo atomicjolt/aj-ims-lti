@@ -14,7 +14,7 @@ Gem::Specification.new do |s|
   s.extra_rdoc_files = 'LICENSE'
   s.license = 'MIT'
   s.files = Dir['{lib}/**/*'] + ['LICENSE', 'README.md', 'Changelog']
-  s.homepage = 'https://github.com/atomicjolt/aj_lms_lti'
+  s.homepage = 'https://github.com/atomicjolt/aj-ims-lti'
   s.require_paths = 'lib'
   s.summary = 'Ruby library for creating IMS LTI tool providers and consumers'
 end
