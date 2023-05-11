@@ -1,7 +1,7 @@
 source "http://rubygems.org"
 gemspec
 
-gem "oauth",   "~>0.5.5"
+gem "oauth",   "~>1.1.0"
 gem "builder"
 gem 'uuid'
 
